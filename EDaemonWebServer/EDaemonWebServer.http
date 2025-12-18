@@ -1,0 +1,6 @@
+@EDaemonWebServer_HostAddress = http://localhost:5117
+
+GET {{EDaemonWebServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
