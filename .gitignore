@@ -443,3 +443,6 @@ FodyWeavers.xsd
 /.vs/EDaemon/v17/.suo
 /.vs/EDaemon/v17/DocumentLayout.backup.json
 /.vs/EDaemon/v17/DocumentLayout.json
+/.vs/EDaemon/DesignTimeBuild/.dtbcache.v2
+/EDaemonWebServerTests/obj/Debug/net8.0/ref/EDaemonWebServerTests.dll
+/EDaemonWebServerTests/obj/Debug/net8.0/refint/EDaemonWebServerTests.dll
