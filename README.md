@@ -13,7 +13,7 @@ O objetivo é fornecer uma arquitetura robusta e escalável para serviços de ba
 
 ## 📂 Estrutura do Projeto
 - `Controllers/` → Endpoints da API.
-- `Models/` → Definições de entidades e DTOs.
+- `Domain/` → Definições de entidades e DTOs.
 - `Services/` → Lógica de negócio e regras de aplicação.
 - `Program.cs` → Configuração inicial do servidor e pipeline.
 

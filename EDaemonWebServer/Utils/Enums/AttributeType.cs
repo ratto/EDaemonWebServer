@@ -2,6 +2,7 @@
 {
     public enum AttributeType
     {
+        None,
         Strength,
         Agility,
         Dexterity,
@@ -10,6 +11,5 @@
         WillPower,
         Charisma,
         Perception,
-        None
     }
 }
