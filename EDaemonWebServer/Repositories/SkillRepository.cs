@@ -1,11 +1,11 @@
-﻿using EDaemonWebServer.Entities.Skills;
+﻿using EDaemonWebServer.Domain.Skills;
 using EDaemonWebServer.Repositories.Interfaces;
 
 namespace EDaemonWebServer.Repositories
 {
     public class SkillRepository : ISkillRepository
     {
-        public Task<IEnumerable<BasicSkill>> GetAllBasicSkillsAsync()
+        public Task<IEnumerable<BasicSkill>> GetAllBasicSkillsAsync(BasicSkillsFilter filter)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿using EDaemonWebServer.Entities.Skills;
+﻿using EDaemonWebServer.Domain.Skills;
 using EDaemonWebServer.Repositories.Interfaces;
 using EDaemonWebServer.Services.Interfaces;
 
@@ -13,9 +13,9 @@ namespace EDaemonWebServer.Services
             _skillRepository = skillRepository;
         }
 
-        public Task<IEnumerable<BasicSkill>> GetAllBasicSkillsAsync()
+        public Task<IEnumerable<BasicSkill>> GetAllBasicSkillsAsync(BasicSkillsFilter filter)
         {
-            return _skillRepository.GetAllBasicSkillsAsync();
+            return _skillRepository.GetAllBasicSkillsAsync(filter);
         }
 
         public Task<BasicSkill?> GetBasicSkillAsync(int id)

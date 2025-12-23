@@ -1,7 +1,7 @@
 ﻿using EDaemonWebServer.Utils.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace EDaemonWebServer.Entities.Skills
+namespace EDaemonWebServer.Domain.Skills
 {
     public class BasicSkill
     {
@@ -12,7 +12,8 @@ namespace EDaemonWebServer.Entities.Skills
         [MaxLength(50)]
         public string Name { get; set; }
         public AttributeType BaseAttribute { get; set; }
-        public int Value { get; set; }
+        public string SkillGroup { get; set; }
+        public bool TrainedOnly { get; set; }
         [MaxLength(150)]
         public string Description { get; set; }
     }
