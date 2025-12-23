@@ -426,3 +426,17 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+/.vs/EDaemon/config/applicationhost.config
+/.vs/EDaemon/CopilotIndices/17.14.1431.25910/CodeChunks.db
+/.vs/EDaemon/CopilotIndices/17.14.1431.25910/SemanticSymbols.db
+/.vs/EDaemon/FileContentIndex/224a3810-a0c3-4a46-b630-664cc860f0bc.vsidx
+/EDaemonWebServer/bin/Debug/net8.0/EDaemonWebServer.dll
+/EDaemonWebServer/bin/Debug/net8.0/EDaemonWebServer.exe
+/EDaemonWebServer/bin/Debug/net8.0/EDaemonWebServer.pdb
+/EDaemonWebServer/obj/Debug/net8.0/EndpointInfo/EDaemonWebServer.json
+/EDaemonWebServer/obj/Debug/net8.0/ref/EDaemonWebServer.dll
+/EDaemonWebServer/obj/Debug/net8.0/refint/EDaemonWebServer.dll
+/EDaemonWebServer/obj/Debug/net8.0/ApiEndpoints.json
+/EDaemonWebServer/obj/Debug/net8.0/apphost.exe
+/EDaemonWebServerTests/bin/Debug/net8.0/.msCoverageSourceRootsMapping_EDaemonWebServerTests
+/EDaemonWebServerTests/bin/Debug/net8.0/CoverletSourceRootsMapping_EDaemonWebServerTests
