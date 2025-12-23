@@ -446,3 +446,8 @@ FodyWeavers.xsd
 /.vs/EDaemon/DesignTimeBuild/.dtbcache.v2
 /EDaemonWebServerTests/obj/Debug/net8.0/ref/EDaemonWebServerTests.dll
 /EDaemonWebServerTests/obj/Debug/net8.0/refint/EDaemonWebServerTests.dll
+/.vs/EDaemon/v17/TestStore/0/000.testlog
+/.vs/EDaemon/v17/.futdcache.v2
+/.vs/ProjectEvaluation/edaemon.metadata.v9.bin
+/.vs/ProjectEvaluation/edaemon.projects.v9.bin
+/.vs/ProjectEvaluation/edaemon.strings.v9.bin
