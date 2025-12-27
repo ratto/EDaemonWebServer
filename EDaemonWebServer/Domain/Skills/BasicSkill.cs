@@ -12,8 +12,9 @@ namespace EDaemonWebServer.Domain.Skills
         [MaxLength(50)]
         public string Name { get; set; }
         public AttributeType BaseAttribute { get; set; }
-        public string SkillGroup { get; set; }
+        public string? SkillGroup { get; set; }
         public bool TrainedOnly { get; set; }
+        [Required]
         [MaxLength(150)]
         public string Description { get; set; }
     }

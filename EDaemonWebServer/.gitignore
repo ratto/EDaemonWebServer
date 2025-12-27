@@ -429,3 +429,4 @@ FodyWeavers.xsd
 obj
 
 *.db
+appsettings.Development.json

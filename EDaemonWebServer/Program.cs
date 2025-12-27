@@ -1,8 +1,20 @@
+using EDaemonWebServer.Repositories;
+using EDaemonWebServer.Repositories.Interfaces;
+using EDaemonWebServer.Services;
+using EDaemonWebServer.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IHealthCheckRepository, HealthCheckRepository>();
+builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+
+builder.Services.AddScoped<IHealthCheckService, HealthCheckService>();
+builder.Services.AddScoped<ISkillService, SkillService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

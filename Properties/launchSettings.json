@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "EDaemonWebServer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_PATH": "D:\\Desenvolvimento\\Workspace\\HitDieRoll Projects\\EDaemonWebServer\\Database\\EDaemon.db"
+      }
+    }
+  }
+}
