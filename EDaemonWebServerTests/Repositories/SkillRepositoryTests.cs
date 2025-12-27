@@ -16,12 +16,17 @@ namespace EDaemonWebServerTests.Repositories
     public class SkillRepositoryTests : IDisposable
     {
         private readonly string _dbPath;
+        private readonly SqliteConnection _keepAliveConnection;
 
         public SkillRepositoryTests()
         {
-            // create a temporary file to act as sqlite database
-            _dbPath = Path.Combine(Path.GetTempPath(), $"skillrepo_test_{Guid.NewGuid():N}.db");
+            // create a shared in-memory sqlite database name and keep one connection open
+            _dbPath = $"file:memdb_{Guid.NewGuid():N}?mode=memory&cache=shared";
             Environment.SetEnvironmentVariable("DATABASE_PATH", _dbPath);
+
+            _keepAliveConnection = new SqliteConnection($"Data Source={_dbPath}");
+            _keepAliveConnection.Open();
+
             CreateSchemaAndSeed();
         }
 
@@ -29,20 +34,18 @@ namespace EDaemonWebServerTests.Repositories
         {
             try
             {
-                if (File.Exists(_dbPath))
-                    File.Delete(_dbPath);
+                _keepAliveConnection?.Close();
+                _keepAliveConnection?.Dispose();
+                Environment.SetEnvironmentVariable("DATABASE_PATH", null);
             }
             catch { }
         }
 
         private void CreateSchemaAndSeed()
         {
-            using var conn = new SqliteConnection($"Data Source={_dbPath}");
-            conn.Open();
-
-            using var cmd = conn.CreateCommand();
+            using var cmd = _keepAliveConnection.CreateCommand();
             cmd.CommandText = @"
-                CREATE TABLE IF NOT EXISTS BasicSkills (
+                CREATE TABLE IF NOT EXISTS BASIC_SKILLS (
                   Id INTEGER PRIMARY KEY,
                   Name TEXT NOT NULL,
                   BaseAttribute INTEGER,
@@ -51,13 +54,14 @@ namespace EDaemonWebServerTests.Repositories
                   Description TEXT NOT NULL
                 );
             ";
-
             cmd.ExecuteNonQuery();
 
-            // seed two skills
-            using var tr = conn.BeginTransaction();
-            using var insert = conn.CreateCommand();
-            insert.CommandText = "INSERT INTO BasicSkills (Name, BaseAttribute, SkillGroup, TrainedOnly, Description) VALUES (@n, @b, @g, @t, @d);";
+            // seed two skills using a transaction on the shared connection
+            using var tr = _keepAliveConnection.BeginTransaction();
+            using var insert = _keepAliveConnection.CreateCommand();
+            insert.CommandText = "INSERT INTO BASIC_SKILLS (Name, BaseAttribute, SkillGroup, TrainedOnly, Description) VALUES (@n, @b, @g, @t, @d);";
+            insert.Transaction = tr;
+
             insert.Parameters.AddWithValue("@n", "Acrobatics");
             insert.Parameters.AddWithValue("@b", (int)AttributeType.Dexterity);
             insert.Parameters.AddWithValue("@g", "Physical");

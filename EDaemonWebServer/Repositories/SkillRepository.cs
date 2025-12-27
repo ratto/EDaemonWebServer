@@ -21,7 +21,7 @@ namespace EDaemonWebServer.Repositories
             sb.AppendLine("  SkillGroup,");
             sb.AppendLine("  TrainedOnly,");
             sb.AppendLine("  Description");
-            sb.AppendLine("FROM BasicSkills");
+            sb.AppendLine("FROM BASIC_SKILLS");
             sb.AppendLine("WHERE 1=1");
 
             if (filter.Name is not null)
@@ -141,7 +141,7 @@ namespace EDaemonWebServer.Repositories
             sb.AppendLine("  SkillGroup,");
             sb.AppendLine("  TrainedOnly,");
             sb.AppendLine("  Description");
-            sb.AppendLine("FROM BasicSkills");
+            sb.AppendLine("FROM BASIC_SKILLS");
             sb.AppendLine("WHERE Id = @id;");
 
             using var connection = GetConnection();

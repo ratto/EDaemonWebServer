@@ -16,7 +16,7 @@ public class SkillController : ControllerBase
     }
 
     [HttpGet("basic-skills")]
-    public async Task<IActionResult> GetAllBasicSkills([FromForm] BasicSkillsFilter filter)
+    public async Task<IActionResult> GetAllBasicSkills([FromQuery] BasicSkillsFilter filter)
     {
         var basicSkills = await _service.GetAllBasicSkillsAsync(filter);
         return Ok(basicSkills);

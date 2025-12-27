@@ -33,7 +33,19 @@ namespace EDaemonWebServer.Repositories
         /// </remarks>
         public BaseRepository(IConfiguration configuration)
         {
+            // Prefer the environment variable for production overrides and
+            // fall back to the configuration value from appsettings (e.g. appsettings.Development.json).
             var dbPath = Environment.GetEnvironmentVariable("DATABASE_PATH");
+
+            if (string.IsNullOrWhiteSpace(dbPath))
+            {
+                // Use the indexer to read configuration to allow simple mocks in tests
+                // (e.g. Mock<IConfiguration>().SetupGet(c => c["DatabasePath"]).Returns(...)).
+                dbPath = configuration?["DatabasePath"];
+            }
+
+            if (string.IsNullOrWhiteSpace(dbPath))
+                throw new InvalidOperationException("Invalid database path.");
 
             _connectionString = $"Data Source={dbPath}";
         }

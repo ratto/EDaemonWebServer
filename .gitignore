@@ -441,3 +441,4 @@ FodyWeavers.xsd
 /EDaemonWebServerTests/bin/Debug/net8.0/EDaemonWebServer.deps.json
 /EDaemonWebServerTests/bin/Debug/net8.0/EDaemonWebServerTests.deps.json
 /EDaemonWebServerTests/obj/EDaemonWebServerTests.csproj.nuget.g.targets
+/.vs/EDaemon/v17/TestStore/0/testlog.manifest

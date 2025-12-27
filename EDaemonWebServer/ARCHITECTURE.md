@@ -1,4 +1,4 @@
-# EDaemonWebServer — Architecture
+# EDaemonWebServer Technical Documentation
 
 This document describes the technical architecture of the `EDaemonWebServer` solution so that automated agents and human developers can understand, run, test, and extend the project.
 
@@ -35,8 +35,9 @@ This document describes the technical architecture of the `EDaemonWebServer` sol
   - `builder.Services.AddScoped<SkillRepository>();` — note the project registers the concrete implementation; for greater flexibility prefer `AddScoped<ISkillRepository, SkillRepository>()` and `AddScoped<ISkillService, SkillService>()`.
 
 ## Database and configuration
-- The base repository (`BaseRepository`) builds the connection string from the `DATABASE_PATH` environment variable:
-  - e.g. `DATABASE_PATH=/path/to/db.sqlite` ? connection string: `Data Source=/path/to/db.sqlite`
+- The base repository (`BaseRepository`) builds the connection string from the `DATABASE_PATH` environment variable or falls back to configuration:
+  - The environment variable `DATABASE_PATH` is read first; if not present the repository checks `IConfiguration` for a `DatabasePath` value.
+  - If no path is provided the `BaseRepository` currently throws an `InvalidOperationException` at construction time, so the environment or configuration must provide a valid path.
 - The repository layer uses `Microsoft.Data.Sqlite` to open connections and execute raw SQL commands.
 - Conventions found in tables (e.g. `BasicSkills`):
   - `BaseAttribute` stored as `INTEGER` mapping to the `AttributeType` enum.
@@ -69,11 +70,12 @@ This document describes the technical architecture of the `EDaemonWebServer` sol
    - Example (PowerShell): `setx DATABASE_PATH "C:\path\to\db.sqlite"` or use `set` for the current session.
 3. Run the API:
    - `dotnet run --project EDaemonWebServer` or run from the IDE.
+   - Swagger is enabled when the app environment is Development (see `Program.cs`).
 4. Access Swagger (in Development): `http://localhost:<port>/swagger`.
 
 ## How to run tests
 - `dotnet test` at the solution root runs the `EDaemonWebServerTests` tests.
-- Repository tests create a temporary SQLite database and set `DATABASE_PATH` to the temporary file (see `SkillRepositoryTests`).
+- Repository tests create an in-memory shared SQLite database and set `DATABASE_PATH` to a `file:memdb...` URI. Tests keep a connection alive during setup so that the shared in-memory DB remains available (see `SkillRepositoryTests`).
 
 ## Tests
 Testing exists in a separate project EDaemonWebServerTests. For test details, see: #file:D:\Desenvolvimento\Workspace\HitDieRoll Projects\EDaemonWebServer\EDaemonWebServerTests\TESTS.md (no deeper testing details included here).
@@ -88,7 +90,7 @@ Testing exists in a separate project EDaemonWebServerTests. For test details, se
 ## Quick extension points for agents
 - To run unit tests automatically: run `dotnet test`.
 - To discover routes and types: inspect `Controllers` + `Domain` + `Services/Interfaces`.
-- To get sample data or populate the DB: create a small SQL script to insert rows into the `BasicSkills` table and point `DATABASE_PATH` to the file.
+- To get sample data or populate the DB: create a small SQL script to insert rows into the `BASIC_SKILLS` table and point `DATABASE_PATH` to the file.
 
 ## Versioning this document
 - This `ARCHITECTURE.md` file is located at the solution root and should be versioned normally with Git. Suggested commit:

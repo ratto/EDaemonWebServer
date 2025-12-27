@@ -14,10 +14,10 @@ This document describes the technical details and recommended testing convention
 
 ## Important project references and packages
 
-- `Microsoft.NET.Test.Sdk` — test host and runner integration for .NET
-- `xunit` and `xunit.runner.visualstudio` — primary test framework and Visual Studio runner
-- `Moq` — mocking library used for interaction-style (mockist) tests and stubs
-- `coverlet.collector` — code coverage collector for CI and local runs
+- `Microsoft.NET.Test.Sdk` — test host and runner integration for .NET (Version in repo: 18.0.1)
+- `xunit` and `xunit.runner.visualstudio` — primary test framework and Visual Studio runner (Versions in repo: xunit 2.9.3, runner 3.1.5)
+- `Moq` — mocking library used for interaction-style (mockist) tests and stubs (Version in repo: 4.20.72)
+- `coverlet.collector` — code coverage collector for CI and local runs (Version in repo: 6.0.4)
 - Explicit `ProjectReference` to the production project: `..\\EDaemonWebServer\\EDaemonWebServer.csproj`
 - A `Using` entry includes `Xunit` so test files may rely on xUnit attributes without additional using lines (depends on implicit usings and project settings)
 
@@ -45,17 +45,12 @@ This document describes the technical details and recommended testing convention
 
 ## London-style (mockist) testing guidance
 
-### The "London school" (mockist) style emphasizes testing interactions between objects by using mocks to verify behavior and communication across boundaries rather than only asserting final state. When applying this style in this project:
+The "London school" (mockist) style emphasizes testing interactions between objects by using mocks to verify behavior and communication across boundaries rather than only asserting final state. When applying this style in this project:
 
 - Use `Moq` to create mocks for collaborators (dependencies) that are external to the unit under test — for example, HTTP clients, message buses, repositories behind an interface.
 - Prefer mocking at boundaries (interfaces) rather than internal implementation details.
 - Use `MockBehavior.Strict` when you want tests to fail if unexpected interactions occur. Use `MockBehavior.Loose` for more forgiving mocks when verifying only a subset of interactions.
-- Set expectations with `Setup(...)` and verify behavior with `Verify(...)`. Example pattern:
-
-  - Arrange: create `var dependency = new Mock<IMyDependency>(MockBehavior.Strict);` and call `dependency.Setup(d => d.Send(It.IsAny<Message>())).Returns(Task.CompletedTask);`
-  - Act: invoke the method under test that should call the dependency
-  - Assert: call `dependency.Verify(d => d.Send(It.Is<Message>(m => m.Type == "expected")), Times.Once);`
-
+- Set expectations with `Setup(...)` and verify behavior with `Verify(...)`.
 - Use `It.Is<T>(...)` to match complex arguments rather than relying on exact reference equality.
 - Avoid over-mocking. If the test becomes a maintenance burden because it mirrors too much implementation detail, consider switching to a state-based (classic/Detroit) test or extract a seam to make behavior easier to verify.
 
@@ -66,7 +61,7 @@ This document describes the technical details and recommended testing convention
 
 ## Test reliability and isolation
 
-- Keep tests hermetic: avoid touching the network, file system, or other shared resources. Replace those with fakes or mocks.
+- Keep tests hermetic: avoid touching the network, file system, or other shared resources. Replace those with fakes or mocks where practical.
 - Use deterministic data and RNG seeding if necessary.
 - Be mindful of xUnit parallelization: prefer test isolation and name unique shared resources or place tests that must not run concurrently into a single collection fixture with `[Collection("NonParallel")]`.
 
@@ -96,4 +91,19 @@ This document describes the technical details and recommended testing convention
 - `EDaemonWebServerTests.csproj` — authoritative list of packages, references, and project settings.
 - Test folders under `EDaemonWebServerTests/` — actual test implementations and examples of patterns used.
 
+## Notes about existing tests in this solution
+
+- Tests exercise repositories using an in-memory shared SQLite database (`file:memdb...` URI). The tests open and keep a connection alive while seeding schema and data to make the in-memory database available to repository instances.
+- Tests for services and controllers use Moq to mock dependencies where appropriate (see `SkillServiceTests` and `SkillControllerTests`).
+
 ## This document should be updated if the project's test runner, mocking library, coverage tooling, or test conventions change.
+
+## Code coverage report
+
+- Coverage tool: `coverlet.collector` producing Cobertura XML
+- Report file (latest run): `EDaemonWebServerTests/TestResults/ee186c24-b4f6-4513-b296-bd7a6304d399/coverage.cobertura.xml`
+- Summary (from the Cobertura report):
+  - Line coverage: 72.66% (202 of 278 lines covered)
+  - Branch coverage: 75.00% (54 of 72 branches covered)
+
+- The Cobertura XML includes per-class and per-file metrics for the `EDaemonWebServer` package. Convert to HTML using a Cobertura-to-HTML tool if a human-friendly report is required.
