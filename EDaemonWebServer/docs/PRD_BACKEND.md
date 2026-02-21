@@ -2,7 +2,7 @@
 
 ## Documento Técnico Detalhado
 
-**Versão:** 2.1  
+**Versão:** 1.0  
 **Data:** Fevereiro de 2026  
 **Escopo:** EDaemonWebServer + Core (Backend)  
 **Status:** Em elaboração  

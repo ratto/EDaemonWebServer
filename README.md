@@ -1,10 +1,10 @@
 # 🏰 e-Daemon API WebServer 🎲
 
-*Um grimório arcano de back-end, forjado nas chamas do .NET 8 e abastecido por uma quantidade profana de café.*
+_Um grimório arcano de back-end, forjado nas chamas do .NET 8 e abastecido por uma quantidade profana de café._
 
 Bem-vindo, ó nobre aventureiro do código! Adentre o domínio do **e-Daemon**, um servidor web que não apenas serve endpoints, mas também conta histórias de reinos distantes e proezas heróicas. Se você procura uma API RESTful com a força de um dragão e a sabedoria de um arquimago, seu lugar é aqui. Pegue sua caneca de café mais robusta e prepare-se para a jornada.
 
-![.NET](https://img.shields.io/badge/.NET-8-blueviolet)
+![.NET](https://img.shields.io/badge/.NET-10-blueviolet)
 ![C#](https://img.shields.io/badge/C%23-12-blue)
 ![Status](https://img.shields.io/badge/status-em_desenvolvimento-red)
 ![License](https://img.shields.io/badge/license-GPL--2.0-blue)
@@ -24,7 +24,8 @@ Nossa magia é organizada. Seguimos os antigos ensinamentos da arquitetura em ca
 - **`Controllers` (Os Arautos do Reino):** Nossos endpoints REST. Eles recebem os chamados do mundo exterior e os direcionam para os magos adequados.
 - **`Services` (O Conselho dos Arquimagos):** Onde a verdadeira mágica acontece. A lógica de negócio, as regras e a orquestração de feitiços residem aqui.
 - **`Repositories` (Os Guardiões do Conhecimento):** Abstrações para o acesso aos dados. Eles conversam com os tomos antigos (bancos de dados) para que nossos magos não precisem sujar as mãos.
-- **`Domain` (Os Manuscritos Sagrados):** Nossas entidades e DTOs. A essência de nossas habilidades, itens e monstros.
+- **`Adapters` (As Chaves da Cosmologia):** São as chaves para acessar as portas do Core, o mantenedor da física e da magia que dá vida ao universo Daemon.
+- **`Model` (Os Manuscritos Sagrados):** Nossas entidades e DTOs. A essência de nossas habilidades, itens e monstros.
 
 ## ✨ Invocações e Feitiços: Endpoints da API
 
@@ -52,7 +53,7 @@ Para trazer o e-Daemon ao seu plano de existência, siga seguintes passos ritual
 
 Se o Ritual funcionar, o e-Daemon despertará, e a documentação dos seus feitiços (Swagger) estará disponível em seu `localhost`.
 
-##  📖 A Forja dos Anões: Contribuindo
+## 📖 A Forja dos Anões: Contribuindo
 
 Sentiu o chamado para forjar novas armas ou aprimorar os feitiços existentes? Contribuições são a alma desta fortaleza! Sinta-se à vontade para abrir `Pull Requests` com melhorias, correções de bugs ou novas funcionalidades. Toda ajuda é bem-vinda para tornar este grimório ainda mais poderoso.
 
@@ -64,7 +65,7 @@ Este projeto é regido pelo antigo e honrado pacto **GPL v2**. Consulte o arquiv
 
 - **Pedro "Ratto" Paixão**
   - **GitHub:** [@ratto](https://github.com/ratto)
-  - **LinkedIn:** [pedro-paixao](https://www.linkedin.com/in/pedro-paixao/)
+  - **LinkedIn:** [pedro-tosta-paixao](https://www.linkedin.com/in/pedro-tosta-paixao/)
 
 ## 💖 Apoie este Projeto
 
@@ -74,8 +75,9 @@ Se o e-Daemon tem sido útil em suas aventuras, considere apoiar o projeto. Qual
 - **Abra `Issues` e `Pull Requests`:** Ajude a encontrar bugs e aprimorar o código.
 - **Compartilhe com seus companheiros:** Espalhe a palavra sobre o e-Daemon!
 - **Doe via PayPal:** Para manter o fluxo de café e a sanidade do mago.
-  - [![PayPal](https://img.shields.io/badge/PayPal-doar-blue.svg?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=BFE8B3R8Q8L4N)
+
+[![PayPal](https://img.shields.io/badge/PayPal-doar-blue.svg?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=8RE442ASFC2PS)
 
 ---
 
-> *Que seus builds compilem na primeira tentativa e seu café nunca esfrie.*
+> _Que seus builds compilem na primeira tentativa e seu café nunca esfrie._
