@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EDaemonWebServer/EDaemonWebServer.csproj" />
+  <Project Path="EDaemonWebServerTests/EDaemonWebServerTests.csproj" />
+</Solution>
